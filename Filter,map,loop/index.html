@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <ul id="personList"></ul>
+    <h5>Zadaj vek od do</h5>
+    <input type="number" id="ageFrom" />
+    <input type="number" id="ageTo" />
+    <h5>Zadaj svoje meno</h5>
+    <input type="text" id="firstName" />
+    <h5>Zadaj svoje priezvisko</h5>
+    <input type="text" id="surname" />
+    <h5>Vyber svoje pohlavie</h5>
+    <input type="radio" value="male" name="gender" />
+    <label for="male">Muz</label>
+    <input type="radio" value="female" name="gender" />
+    <label for="female">Zena</label>
+    <h5>Vyber svoj status zamestnania</h5>
+    <select id="employmentStateList"></select>
+    <br />
+    <br />
+    <button type="button" onclick="onSubmit()" id="filterButton">Filter</button>
+    <ul id="filteredList"></ul>
+  </body>
+</html>
