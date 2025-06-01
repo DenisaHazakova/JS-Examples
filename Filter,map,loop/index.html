@@ -8,19 +8,23 @@
   </head>
   <body>
     <ul id="personList"></ul>
-    <h5>Zadaj vek od do</h5>
+    <h5>Fill in age from and to</h5>
     <input type="number" id="ageFrom" />
     <input type="number" id="ageTo" />
-    <h5>Zadaj svoje meno</h5>
+    <h5>Firstname</h5>
     <input type="text" id="firstName" />
-    <h5>Zadaj svoje priezvisko</h5>
+    <h5>Surname</h5>
     <input type="text" id="surname" />
-    <h5>Vyber svoje pohlavie</h5>
+    <h5>Select a gender</h5>
+    // To create radio buttons we need to use input with type "radio" together with label to specify a name
     <input type="radio" value="male" name="gender" />
-    <label for="male">Muz</label>
+    <label for="male">Male</label>
+    // To secure that only one radio button will be selected, inputs needs to be named the same 
     <input type="radio" value="female" name="gender" />
-    <label for="female">Zena</label>
-    <h5>Vyber svoj status zamestnania</h5>
+    <label for="female">Female</label>
+    <h5>Select a status of employee</h5>
+    // To create dropdwon we use select element
+    // Child elements "option" are created via .js file with loop method 
     <select id="employmentStateList"></select>
     <br />
     <br />
