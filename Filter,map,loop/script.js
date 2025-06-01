@@ -1,3 +1,4 @@
+// Creation of array of objects with parameters id, age, firstname, surname, gender, employmentState
 const people = [
   {
     id: 1,
@@ -81,82 +82,99 @@ const people = [
   },
 ];
 
+// To secure that functions will be invoked only when DOM will be fully loaded, we can use DOMContentLoaded
+// and call them here
 document.addEventListener("DOMContentLoaded", (event) => {
   renderPeople();
   renderEmployeeState();
 });
 
+// To secure that each employee status will be available only once 
+// we need to remove the duplicates.
+// With new Set() method we secure that duplicates will be removed. However, it gives an object
+// with "..." we return only inside values
+// with "[]" and the start we return array so we can use map
 const uniqueEmploymentStates = [
   ...new Set(people.map((person) => person.employmentState)),
 ];
 
+// Function return states of employees with dropdown
 function renderEmployeeState() {
+  // First we need to declare element select, creator of dropdown
+  // It is parrent element of later created element option
   const select = document.getElementById("employmentStateList");
 
+  // We loop through uniqueEmploymentStates (the result of map)
+  // In this time we have array with only unique state values
   for (let state of uniqueEmploymentStates) {
+    // We need to create child element "option" of select where we add the value of state
     const option = document.createElement("option");
+    // Insertion of value state to element option
     option.innerHTML = state;
+    // We need to append the created element option to its parent element select
     select.appendChild(option);
   }
 }
 
+// Function for rendering all persons from array of objects named people
 function renderPeople() {
+  // Firstly, we need to declare element unordered list into which will be the people values inserted
   const ul = document.getElementById("personList");
 
+  // Looping through each object of people
   for (let person of people) {
+    // Creating element li where the value of person will be inserted
     const li = document.createElement("li");
 
+    // Into li element we are inserting the following values of person:
+    // id, firstname, surname, gender and employmentState
     li.innerHTML = `${person.id} ${person.firstname} ${person.surname} ${person.gender} ${person.employmentState}`;
+    // We need to append the filled child element li into its parent element ul
     ul.appendChild(li);
   }
 }
 
+// To ensure filter function will work even any input is empty
 function isFormValueValid(formFieldValue, personValue) {
-  // ak je hodnota vo formulari prazdna, nemusime kontrolovat - vraciame true
-  // "ageFrom" === "" || "ageTo" === "" , ....
+  // If form value is empty, return true
+  // It is not necessary to check the form value
   if (formFieldValue.length === 0) {
     return true;
   }
 
-  // hodnotu vyplnenu mame, kontrolujeme ci je zhodna s pouzivatelom
+  // Here we know that return is false which means that form value is not empty,
+  // then we compare if its value is same as value from object person
   return formFieldValue == personValue;
 }
 
-// kontrolujeme, ci vek cloveka splna vek vo filtri
-
+// Function for check of age for each case
 function checkAge(ageFrom, ageTo, age) {
+  // Declaration of inputs of age if they are not empty
   let isAgeFromFilled = ageFrom.length > 0;
   let isAgeToFilled = ageTo.length > 0;
-  //   if (isAgeFromFilled && isAgeToFilled) {
-  //     return ageFrom <= age && ageTo >= age;
-  //   } else {
-  //     return ageFrom <= age || ageTo >= age;
-  //   }
+
+  // First condition: both inputs are empty
   if (!isAgeFromFilled && !isAgeToFilled) {
+    // Do not check the values and filter other fields
     return true;
+    // Second condition: both inputs are filled
   } else if (isAgeFromFilled && isAgeToFilled) {
+    // Check if it meets the following condition
     return ageFrom <= age && ageTo >= age;
+    // Third condition: only age from is filled
   } else if (isAgeFromFilled) {
+    // Then only check if age from is less than age from object
     return ageFrom <= age;
+    // Fourth condition: only age to is filled
   } else if (isAgeToFilled) {
+    // Then only check if age to is greater than age from object
     return ageTo >= age;
   }
 }
 
-/**
- * 1. v HTML zobraz zoznam osob v ul liste (vsetky zaznamy)
- * 2. Vytvor vyhladavaci filter, ktory bude filtrovat podla jedneho/viacerych atributov:
- *    - vek (od, do input)
- *    - meno (input)
- *    - priezvisko (input)
- *    - pohlavie (radio button)
- *    - status zamestnania (dropdown) - pozor, musi byt automaticky vygenerovany podla dostupnych statusov
- *
- *    - filter sa spusti stlacenim buttonu
- *
- */
-
+// After clicking the filer button
 function onSubmit() {
+  // Basic declaration of all inputs
   const firstName = document.getElementById("firstName").value;
   const surname = document.getElementById("surname").value;
   const ageFrom = document.getElementById("ageFrom").value;
@@ -167,33 +185,30 @@ function onSubmit() {
     'input[name = "gender"]:checked'
   );
 
-  // 1. filter funkcia na people
-  // 2. nove ul
-  // 3. nove li s vysledkami (loop cez vysledky filtru)
+  // Using filter method to loop through whole array of objects - people where person is the object
   const filteredPeople = people.filter((person) => {
-    // zisti, ci je firstName z filtru vyplneny
+    
+    // Check with function isFormValueValid (defined above) if input firstname is filled 
     const firstnameCheckPassed = isFormValueValid(firstName, person.firstname);
-
-    // zisti, ci je surname z filtru vyplneny
+    // Check if input surname is filled
     const surnameCheckPassed = isFormValueValid(surname, person.surname);
 
-    // zisti, ci je gender z filtru vyplneny
+    // Check if input gender is filled because it can return null or element
     let genderCheckPassed = true;
-    // mam null alebo element ?
+    // Below I know that it return an element
     if (selectedGenderEl) {
-      // mam element
-      // idem porovnavat hodnotu
-
+      // Compare if gender selected in form is the same as current gender of looped object person
       genderCheckPassed = selectedGenderEl.value === person.gender;
     }
 
-    //check pre age validaciu
+    // Check if age inputs are filled
     const agePassed = checkAge(ageFrom, ageTo, person.age);
 
-    //check pre employeeState
+    // Check if selected status from form dropdown is the same as current state of looped object
     const employeePassed = employeeState === person.employmentState;
 
     return (
+      // Return all matched values from looped array people
       firstnameCheckPassed &&
       surnameCheckPassed &&
       genderCheckPassed &&
@@ -202,9 +217,12 @@ function onSubmit() {
     );
   });
 
+  
   const ul = document.getElementById("filteredList");
 
   for (const person of filteredPeople) {
+    // All returned values from above return needs to be inserted into newly created li and then 
+    // created li needs to be appended into its parent element ul
     const li = document.createElement("li");
     li.innerHTML = `${person.id} ${person.firstname} ${person.surname} ${person.gender} ${person.employmentState} ${person.age}`;
     ul.appendChild(li);
