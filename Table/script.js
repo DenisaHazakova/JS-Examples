@@ -21,28 +21,32 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 
 function renderCities() {
-  // Declare table body element
+  // declaration of table body element
   const tbody = document.getElementById("tableBody");
+
+  //loop through array of objects cities
   for (const city of cities) {
-    // Create the row of table body
-    const row = document.createElement("tr");
+    // create row element
+    const rowEl = document.createElement("tr");
 
-    // body -> tr ->td
+    // insertion of child element row to its parent - table body element
+    tbody.appendChild(rowEl);
 
-    // Create the column of table body
-    tbody.appendChild(row);
+    // create array of columns samely named as atributes in object city
     const columns = ["name", "area", "population", "location"];
-    for (const column of columns) {
-      const columnEl = document.createElement("td");
-      // column === 'name'
-      // city === { 'name': '....' }
-      // city.name
-      columnEl.innerHTML = city[column];
-      row.appendChild(columnEl);
-    }
 
-    // need to create a row and append it to parent = table body
-    // then need to create a column in that row = it is child of table body
-    // in that column need to insert all data
+    // loop through array of columns
+    for (const column of columns) {
+      // create column element
+      const columnEl = document.createElement("td");
+
+      // Assign value of current value of column in object city
+      // first value of column is 'name', value of name in city is 'Bratislava'
+      // second value of column is 'area', value of area in city is '367.6', etc.
+      columnEl.innerHTML = city[column];
+
+      // insertion of child element column into its parent element row
+      rowEl.appendChild(columnEl);
+    }
   }
 }
