@@ -1,63 +1,112 @@
-html{
-    font-family: 'Times New Roman', Times, serif;
-    font: 14px;
+:root {
+  --surface-0: hsl(229, 41%, 5%);
+  --surface-1: hsl(229, 25%, 12%);
+  /* color of input box */
+  --surface-2: #9099f0;
+  /* color of text in inputs */
+  --text-1: #f3eff6;
+  --text-2: hsl(229, 12%, 66%);
+  --required: hsl(321, 32%, 56%);
+  --accent: hsl(262, 84%, 52%);
+  /* first parameter: how thick the border is, second: style of border, third: color of border */
+  --border: 0.5px solid #6d3feb;
 }
 
-:root{
-    /* color of input box */
-    --surface-2: #9099f0;
-    /* color of text in inputs */
-    --text-1: #f3eff6;
-    /* first parameter: how thick the border is, second: style of border, third: color of border */
-    --border: 0.5px solid #6d3feb;
+* {
+  /* styling of all elements */
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+    /* apply following styling for the entire body */
+  font-family: "Radio Canada", sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.6;
+
+  background-color: var(--surface-0);
+  color: var(--text-1);
+/* This adds padding at the top of the body element */
+  padding-block-start: 10vb;
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+a {
+  color: hsl(from var(--accent) h s 80%);
 }
 
 button,
 input,
 textarea,
 select {
-    font: inherit;
+  font: inherit;
 }
 
 form {
-    display: grid;
-    gap: 1rem;
-    @media (width > 720px){
-        grid-template-columns: 1fr 1fr;
-    }
-    
+  display: grid;
+  gap: 1rem;
+  @media (width > 720px) {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .form-group {
-display: grid;
+  display: grid;
 }
 
 label {
-    /* Ensure that text in labels of inputs are uppercase*/
-    text-transform: uppercase;
-    /* if html document has xy font-size, with 1rem it ensures that font-size is the same */
-    font-size: 1rem;
+  /* Ensure that text in labels of inputs are uppercase*/
+  text-transform: uppercase;
+  /* if html document has xy font-size, with 1rem it ensures that font-size is the same */
+  font-size: 1rem;
+}
+
+.fine-print {
+  text-transform: revert;
+  line-height: 1.4;
+}
+
+.contact-form {
+  display: grid;
+  gap: 1rem;
+
+  background-color: var(--surface-1);
+  padding: 3rem;
+  border-radius: 24px;
+  width: min(100% - 4rem, 1200px);
+  margin-inline: auto;
 }
 
 input {
-    /* var(--) are custom CSS properties which needs to be defined earlier in this code */
-    background: var(--surface-2);
-    color: var(--text-1);
-    border: var(--border);
-    /* zaoblenie ramika  */
-    border-radius: 16px;
-    /* the space inside the input, between the content and the border */
-    /* 1ex = top and bottom, 2ex = right and left */
-    padding: 1ex 2ex;
+  /* var(--) are custom CSS properties which needs to be defined earlier in this code */
+  background: var(--surface-2);
+  color: var(--text-1);
+  border: var(--border);
+  /* zaoblenie ramika  */
+  border-radius: 16px;
+  /* the space inside the input, between the content and the border */
+  /* 1ex = top and bottom, 2ex = right and left */
+  padding: 1ex 2ex;
 }
 
 button {
-    background: var(--surface-2);
-    color: var(--text-1);
-    border: var(--border);
-    padding: 8px 0px;
+  cursor: pointer;
+  background-color: var(--accent);
+  color: var(--text-1);
+  padding: 1em 1.5em;
+  border: 0;
+  border-radius: 16px;
+
+  &:hover,
+  &:focus-visible {
+    background-color: hsl(from var(--accent) h s 30%);
+  }
 }
 
-.fine-print{
-    text-transform: none;
-}
+
+
