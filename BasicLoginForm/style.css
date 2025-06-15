@@ -1,15 +1,15 @@
 :root {
-  --surface-0: hsl(229, 41%, 5%);
+    /* color of inputs boxes */
+ --surface-0: hsl(229, 41%, 5%);
   --surface-1: hsl(229, 25%, 12%);
-  /* color of input box */
-  --surface-2: #9099f0;
+  --surface-2: hsl(234, 26%, 16%);
   /* color of text in inputs */
-  --text-1: #f3eff6;
+  --text-1: hsl(229, 12%, 100%);
   --text-2: hsl(229, 12%, 66%);
   --required: hsl(321, 32%, 56%);
   --accent: hsl(262, 84%, 52%);
   /* first parameter: how thick the border is, second: style of border, third: color of border */
-  --border: 0.5px solid #6d3feb;
+  --border: 1px solid hsl(229, 22%, 19%);
 }
 
 * {
@@ -88,6 +88,10 @@ input {
   background: var(--surface-2);
   color: var(--text-1);
   border: var(--border);
+  /* accent color only apply for elements such as checkbox, radio buttons
+  so, in this case once the checkbox is ticked, the accent color is applied
+  ticked checkbox = purple color */
+  accent-color: var(--accent);
   /* zaoblenie ramika  */
   border-radius: 16px;
   /* the space inside the input, between the content and the border */
