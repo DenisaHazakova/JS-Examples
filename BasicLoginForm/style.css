@@ -115,6 +115,8 @@ it will style the label element */
   grid-column: 1/-1;
   /* to style checkbox (input element), we need to set this as display flex */
   display: flex;
+  /* Create gap(=space) between label text and input(=checkbox) */
+  gap: 1rem;
 }
 
 
