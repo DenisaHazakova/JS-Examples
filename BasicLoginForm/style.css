@@ -65,6 +65,11 @@ label {
   text-transform: uppercase;
   /* if html document has xy font-size, with 1rem it ensures that font-size is the same */
   font-size: 1rem;
+  /* It will remove the gap from the bottom of label text */
+  text-box-trim: trim-both;
+  /* cap = top of ours capital letters
+  alphabetic = bottom line of text  */
+  /* text-box-edge: cap alphabetic; */
 }
 
 .fine-print {
