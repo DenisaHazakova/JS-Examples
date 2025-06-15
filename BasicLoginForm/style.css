@@ -19,14 +19,14 @@
 }
 
 body {
-    /* apply following styling for the entire body */
+  /* apply following styling for the entire body */
   font-family: "Radio Canada", sans-serif;
   font-size: 1.125rem;
   line-height: 1.6;
 
   background-color: var(--surface-0);
   color: var(--text-1);
-/* This adds padding at the top of the body element */
+  /* This adds padding at the top of the body element */
   padding-block-start: 10vb;
 }
 
@@ -50,6 +50,7 @@ select {
 form {
   display: grid;
   gap: 1rem;
+  /* create two columns when width is more than 720px, otherwise keep one column */
   @media (width > 720px) {
     grid-template-columns: 1fr 1fr;
   }
@@ -92,6 +93,35 @@ input {
   /* the space inside the input, between the content and the border */
   /* 1ex = top and bottom, 2ex = right and left */
   padding: 1ex 2ex;
+  /* if we would not set the width to 100%, then with smaller screen resolution the inputs
+  will overflow the parent element contact-form
+  with 100% width the inputs will automatically shrink based on parent div contact-form width 
+  but we cannot apply 100% width to all inputs because it will affect also input type checkbox*/
+}
+
+/* previously within input we set the width to 100%. Which means that input type checkbox
+is also affected. It ended with huge square checkbox.
+so, we want to apply width 100% for all inputs except for input type="checkbox"
+so we use following: */
+input:not([type="checkbox"]){
+    width: 100%;
+}
+
+/* style the checkbox
+firstly find class form-group and then check element which has class fine-print in it
+it will style the label element */
+.form-group:has(.fine-print) {
+  /* with 1/-1 it will stretch the entire width of the parent .form-group it has */
+  grid-column: 1/-1;
+  /* to style checkbox (input element), we need to set this as display flex */
+  display: flex;
+}
+
+
+
+/* styling the position of the button we need to access it through its parent */
+.contact-form button {
+  justify-self: start;
 }
 
 button {
@@ -107,6 +137,3 @@ button {
     background-color: hsl(from var(--accent) h s 30%);
   }
 }
-
-
-
