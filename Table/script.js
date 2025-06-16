@@ -109,21 +109,33 @@ function createTableRow(city, tableEl) {
   // Create column element for action
   const actColEl = document.createElement("td");
 
+  // Create div element
+  const divEdit = document.createElement('div');
+  // Create class for created element
+  divEdit.classList.add('divEdit');
+
   // Create button element and name it 'show detail'
   const btn = document.createElement("button");
   btn.textContent = "Show detail";
+  // Adding class 'editBtn'
+  btn.classList.add('editBtn');
 
   // Create button element for removing the row and name it 'Remove'
   const btnRemove = document.createElement('button');
   btnRemove.textContent = "Remove";
+  // Adding class 'editBtn'
+  btnRemove.classList.add('editBtn');
+
+  // Append buttons to div element
+  divEdit.appendChild(btn);
+  divEdit.appendChild(btnRemove);
 
   // Assign data-id atribute with id of city
   btn.setAttribute("data-id", city.id);
   btnRemove.setAttribute("data-id", city.id);
 
-  // Append btn to its parent
-  actColEl.appendChild(btn);
-  actColEl.appendChild(btnRemove);
+
+  actColEl.appendChild(divEdit);
 
   // Append it to its parent
   row.appendChild(actColEl);
@@ -236,14 +248,14 @@ function onAddBtnClick() {
 
 }
 
-function generateId(){
+function generateId() {
   return Math.floor(Math.random() * 10);
 }
 
 function addDetail() {
 
   // Create new object from inputs
-  const cityDetailObject = { 
+  const cityDetailObject = {
     id: generateId(),
     name: document.getElementById('cityDet').value,
     area: document.getElementById('areaDet').value,

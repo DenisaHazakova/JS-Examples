@@ -1,11 +1,61 @@
-table, th, td {
-    border: 1px solid;
-  }
+:root {
+  /* color of inputs boxes */
+  --surface-0: hsl(229, 41%, 5%);
+  --surface-1: hsl(228, 56%, 67%);
+  --surface-2: hsl(234, 26%, 16%);
+  /* color of text in inputs */
+  --text-1: hsl(229, 12%, 100%);
+  --text-2: hsl(229, 12%, 66%);
+  --required: hsl(321, 32%, 56%);
+  --accent: hsl(262, 84%, 52%);
+  /* first parameter: how thick the border is, second: style of border, third: color of border */
+  --border: 1px solid hsl(229, 22%, 19%);
+}
 
-  .hidden{
-    display: none;
-  }
+body {
+  /* apply following styling for the entire body */
+  font-family: "Radio Canada", sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.6;
 
- .hiddenDiv {
+
+  /* This adds padding at the top of the body element */
+  padding-block-start: 10vb;
+}
+
+th,
+td {
+  padding: 8px;
+}
+
+table,
+th,
+td {
+  border: 1px solid;
+}
+
+table {
+  background-color: var(--surface-1);
+  color: var(--text-1);
+}
+
+.hidden {
   display: none;
- }
+}
+
+.hiddenDiv {
+  display: none;
+}
+
+.divEdit {
+  display: flex;
+  gap: 10px;
+}
+
+.editBtn {
+  border-radius: 16px;
+  padding: 10px 10px;
+  cursor: pointer;
+  background-color: var(--accent);
+  border: 0;
+}
