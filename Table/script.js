@@ -1,5 +1,5 @@
 // Creating array of objects named cities with parameters id, name, area, location
-const cities = [
+let cities = [
   {
     id: 1001,
     name: "Bratislava",
@@ -84,53 +84,64 @@ document.addEventListener("DOMContentLoaded", (event) => {
   renderCities();
 });
 
+function createTableRow(city, tableEl) {
+
+  // Create row element
+  const row = document.createElement("tr");
+  // Insert atribute to row so we can later use index of current row
+  row.setAttribute("data-id", city.id);
+
+  // Append it to its parent - table body
+  tableEl.appendChild(row);
+
+  // Loop through tableColumns
+  for (const column of tableColumns) {
+    // Create column el
+    const columnEl = document.createElement("td");
+    // Set atribute to column element so we can use name of column later
+    columnEl.setAttribute("data-key", column);
+    // Insert value to columnEl
+    columnEl.innerHTML = city[column];
+
+    // Append columnEl to its parent
+    row.appendChild(columnEl);
+  }
+  // Create column element for action
+  const actColEl = document.createElement("td");
+
+  // Create button element and name it 'show detail'
+  const btn = document.createElement("button");
+  btn.textContent = "Show detail";
+
+  // Create button element for removing the row and name it 'Remove'
+  const btnRemove = document.createElement('button');
+  btnRemove.textContent = "Remove";
+
+  // Assign data-id atribute with id of city
+  btn.setAttribute("data-id", city.id);
+  btnRemove.setAttribute("data-id", city.id);
+
+  // Append btn to its parent
+  actColEl.appendChild(btn);
+  actColEl.appendChild(btnRemove);
+
+  // Append it to its parent
+  row.appendChild(actColEl);
+
+  // Function to call when click on btn 'Show details'
+  btn.addEventListener("click", onRowClick);
+
+  // Function to call when click on btn 'remove'
+  btnRemove.addEventListener('click', onRemoveClick)
+}
+
 function renderCities() {
   // Declare of element table body
   const tbody = document.getElementById("tableBody");
 
   // Loop through cities from index 0
-  for (let index = 0; index < cities.length; index++) {
-    const city = cities[index];
-    
-    // Create row element
-    const row = document.createElement("tr");
-    // Insert atribute to row so we can later use index of current row
-    row.setAttribute("data-index", index);
-
-    // Append it to its parent - table body
-    tbody.appendChild(row);
-
-    // Loop through tableColumns
-    for (const column of tableColumns) {
-      // Create column el
-      const columnEl = document.createElement("td");
-      // Set atribute to column element so we can use name of column later
-      columnEl.setAttribute("data-key", column);
-      // Insert value to columnEl
-      columnEl.innerHTML = city[column];
-
-      // Append columnEl to its parent
-      row.appendChild(columnEl);
-    }
-
-    // Create last column for action
-    const actColEl = document.createElement("td");
-
-    // Create button element and name it 'show detail'
-    const btn = document.createElement("button");
-    btn.textContent = "Show detail";
-
-    // Assign data-id atribute with id of city
-    btn.setAttribute("data-id", city.id);
-
-    // Append btn to its parent
-    actColEl.appendChild(btn);
-
-    // Append it to its parent
-    row.appendChild(actColEl);
-
-    // Function to call when click on btn
-    btn.addEventListener("click", onRowClick);
+  for (const city of cities) {
+    createTableRow(city, tbody);
   }
 }
 
@@ -162,10 +173,31 @@ function onRowClick(event) {
   locationInput.value = foundedCity.location;
 }
 
+function onRemoveClick(event) {
+
+  // Find id of clicked button
+  const rowId = event.target.getAttribute('data-id');
+
+  // Declare element table body
+  const tbody = document.getElementById("tableBody");
+
+  // Declare row currently clicked in main table cities
+  const trEl = tbody.querySelector(`tr[data-id="${rowId}"]`);
+
+
+  // Need to use filter on cities
+  // Do not find the index so we can return only valid rows
+  cities = cities.filter(city => city.id != rowId)
+  trEl.remove();
+}
+
 // We want to ensure that changes in array of objects cities will be updates/shown also in the table on web
 function onUpdate() {
+  const originObject = cities[selectedRowCityIndex];
+
   // Declare the object updatedCity with the same attributes as cities has and assign the currentvalues of inputs
   const updatedCity = {
+    id: originObject.id,
     name: document.getElementById("cityName").value,
     area: document.getElementById("area").value,
     location: document.getElementById("location").value,
@@ -180,7 +212,8 @@ function onUpdate() {
   // Declare element table body
   const tbody = document.getElementById("tableBody");
   // Declare row currently clicked in main table cities
-  const trEl = tbody.querySelector(`tr[data-index="${selectedRowCityIndex}"]`);
+  //tr data id je id objektu = 1001, 1002, 1003, atd
+  const trEl = tbody.querySelector(`tr[data-id="${cities[selectedRowCityIndex].id}"]`);
 
   // Loop through array tableColumns
   for (const column of tableColumns) {
@@ -191,4 +224,36 @@ function onUpdate() {
     // Into founded column we insert that value which is inserted in inputs
     tdElement.textContent = updatedCity[column];
   }
+}
+
+
+function onAddBtnClick() {
+
+  // Find div element with inputs
+  const divEl = document.getElementById('addCityDetail');
+  // When clicking on button, classList hiddenDiv from div element will be removed
+  divEl.classList.remove('hiddenDiv');
+
+}
+
+function generateId(){
+  return Math.floor(Math.random() * 10);
+}
+
+function addDetail() {
+
+  // Create new object from inputs
+  const cityDetailObject = { 
+    id: generateId(),
+    name: document.getElementById('cityDet').value,
+    area: document.getElementById('areaDet').value,
+    population: document.getElementById('populationDet').value,
+    location: document.getElementById('locationDet').value
+  }
+  // Need to declare tablebody
+  const tbody = document.getElementById("tableBody");
+  createTableRow(cityDetailObject, tbody);
+  console.log(cityDetailObject);
+
+  // after filing the inputs i click on save and the inputs will reflect as last row of table cities
 }

@@ -1,43 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
-    <title>Rendering table</title>
-  </head>
-  <body>
-    <h4>Top 10 largest cities in Slovakia</h4>
-    <br />
 
-    <table id="table">
-      <thead>
-        <tr>
-          <th>City</th>
-          <th>Area</th>
-          <th>Population</th>
-          <th>Location</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody"></tbody>
-    </table>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js"></script>
+  <title>Rendering table</title>
+</head>
+
+<body>
+  <h4>Top 10 largest cities in Slovakia</h4>
+  <br />
+  <button btn-id="add-Btn" onclick="onAddBtnClick()">Add</button>
+  <br>
+  <br>
+  <table id="table">
+    <thead>
+      <tr>
+        <th>City</th>
+        <th>Area</th>
+        <th>Population</th>
+        <th>Location</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+  <br />
+  <div id="cityDetail" class="hidden">
+    <label for="cityName">City</label>
+    <input type="text" id="cityName" />
     <br />
-    <div id="cityDetail" class="hidden">
-      <label for="cityName">City</label>
-      <input type="text" id="cityName" />
-      <br />
-      <label for="population">Population</label>
-      <input type="number" id="population" />
-      <br />
-      <label for="area">Area (km2)</label>
-      <input type="number" id="area" />
-      <br />
-      <label for="location">Location</label>
-      <input type="text" id="location" />
-      <br />
-      <button type="submit" onclick="onUpdate()">Save</button>
-    </div>
-  </body>
+    <label for="population">Population</label>
+    <input type="number" id="population" />
+    <br />
+    <label for="area">Area (km2)</label>
+    <input type="number" id="area" />
+    <br />
+    <label for="location">Location</label>
+    <input type="text" id="location" />
+    <br />
+    <button type="submit" onclick="onUpdate()">Save</button>
+  </div>
+  <div id="addCityDetail" class="hiddenDiv">
+    <label for="city">City</label>
+    <input type="text" id="cityDet">
+    <br>
+    <label for="population">Population</label>
+    <input type="number" id="populationDet">
+    <br>
+    <label for="area">Area</label>
+    <input type="number" id="areaDet">
+    <br>
+    <label for="location">Location</label>
+    <input type="text" id="locationDet">
+    <br>
+    <button type="submit" id="btnAdd" onclick="addDetail()">Save and Add</button>
+  </div>
+</body>
+
 </html>
