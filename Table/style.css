@@ -47,6 +47,7 @@ table {
   display: none;
 }
 
+
 .divEdit {
   display: flex;
   gap: 10px;
@@ -58,4 +59,10 @@ table {
   cursor: pointer;
   background-color: var(--accent);
   border: 0;
+  color: var(--text-1);
+
+  &:hover,
+  &:focus-visible {
+    background-color: hsl(from var(--accent) h s 30%);
+  }
 }
