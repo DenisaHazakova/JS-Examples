@@ -29,19 +29,22 @@
   </table>
   <br />
   <div id="cityDetail" class="hidden">
-    <label for="cityName">City</label>
-    <input type="text" id="cityName" />
-    <br />
-    <label for="population">Population</label>
-    <input type="number" id="population" />
-    <br />
-    <label for="area">Area (km2)</label>
-    <input type="number" id="area" />
-    <br />
-    <label for="location">Location</label>
-    <input type="text" id="location" />
-    <br />
-    <button type="submit" onclick="onUpdate()">Save</button>
+    <div class="form-group"><label for="cityName">City</label>
+      <input type="text" id="cityName" />
+    </div>
+    <div class="form-group"><label for="population">Population</label>
+      <input type="number" id="population" />
+    </div>
+    <div class="form-group"><label for="area">Area (km2)</label>
+      <input type="number" id="area" />
+    </div>
+    <div class="form-group"><label for="location">Location</label>
+      <input type="text" id="location" />
+    </div>
+    <div class="saveBn">
+      <button type="submit" onclick="onUpdate()">Save</button>
+    </div>
+
   </div>
   <div id="addCityDetail" class="hiddenDiv">
     <label for="city">City</label>
