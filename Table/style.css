@@ -1,8 +1,9 @@
 :root {
   /* color of inputs boxes */
   --surface-0: hsl(229, 41%, 5%);
-  --surface-1: hsl(228, 56%, 67%);
+  --surface-1: hsl(227, 14%, 60%);
   --surface-2: hsl(234, 26%, 16%);
+  --surface-3:  hsl(226, 22%, 77%);
   /* color of text in inputs */
   --text-1: hsl(229, 12%, 100%);
   --text-2: hsl(229, 12%, 66%);
@@ -10,17 +11,46 @@
   --accent: hsl(262, 84%, 52%);
   /* first parameter: how thick the border is, second: style of border, third: color of border */
   --border: 1px solid hsl(229, 22%, 19%);
+  color: hsl(226, 22%, 77%);
+}
+
+* {
+  /* styling of all elements */
+  box-sizing: border-box;
+  margin: 0;
+}
+
+h1 {
+  margin: 10px;
 }
 
 body {
   /* apply following styling for the entire body */
   font-family: "Radio Canada", sans-serif;
-  font-size: 1.125rem;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 10px;
 
 
   /* This adds padding at the top of the body element */
   padding-block-start: 10vb;
+}
+
+h4 {
+  font-size: 1.6rem;
+  color: rgb(57, 60, 63);
+}
+
+.add-Btn {
+  border-radius: 14px;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  background-color: var(--surface-1);
+  &:hover,
+  &:focus-visible {
+    background-color: var(--surface-3);
+  }
 }
 
 th,
@@ -32,11 +62,18 @@ table,
 th,
 td {
   border: 1px solid;
+  border-collapse: collapse;
 }
 
 table {
   background-color: var(--surface-1);
   color: var(--text-1);
+  text-align: center;
+  border-radius: 10px;
+}
+
+tr:nth-child(even) {
+  background-color:var(--surface-3);
 }
 
 .hidden {
