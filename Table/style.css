@@ -78,6 +78,24 @@ tr:nth-child(even) {
 
 .hidden {
   display: none;
+  display: grid;
+  background-color: var(--surface-0);
+  width: 40%;
+  border-radius: 8px;
+}
+
+.form-group {
+  display: grid;
+  gap:0.8rem;
+}
+
+.form-group input{
+  width: 85%;
+   background: var(--surface-2);
+  color: var(--text-1);
+  border: var(--border);
+   border-radius: 16px;
+    padding: 5px;
 }
 
 .hiddenDiv {
