@@ -183,7 +183,7 @@ function onSubmit() {
   // vrati bud oznaceny radio input element ALEBO null
   const selectedGenderEl = document.querySelector(
     'input[name = "gender"]:checked'
-  );
+  ).value;
 
   // Using filter method to loop through whole array of objects - people where person is the object
   const filteredPeople = people.filter((person) => {
@@ -198,7 +198,7 @@ function onSubmit() {
     // Below I know that it return an element
     if (selectedGenderEl) {
       // Compare if gender selected in form is the same as current gender of looped object person
-      genderCheckPassed = selectedGenderEl.value === person.gender;
+      genderCheckPassed = selectedGenderEl === person.gender;
     }
 
     // Check if age inputs are filled
